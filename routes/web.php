@@ -111,3 +111,15 @@ Route::prefix('ventas')->name('ventas.')->group(function () {
         return view('admin.inventario', compact('repuestos'));
     })->name('inventario.consulta');
 });
+
+Route::view('/', 'welcome');
+
+Route::view('dashboard', 'dashboard')
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');
+
+Route::view('profile', 'profile')
+    ->middleware(['auth'])
+    ->name('profile');
+
+require __DIR__.'/auth.php';
