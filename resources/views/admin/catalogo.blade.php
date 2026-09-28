@@ -72,7 +72,7 @@
                     
                     <div class="mt-auto pt-3 border-t border-gray-100 flex justify-between items-center">
                         <span class="text-sm font-black text-gray-900">${{ number_format($repuesto->precio, 2) }}</span>
-                        <a href="{{ route('admin.repuestos.edit', $repuesto->id ?? 1) }}" class="text-gray-400 hover:text-blue-600 transition" title="Editar Detalles">
+                        <a href="{{ route('admin.repuestos.edit', $repuesto->id) }}" class="text-gray-400 hover:text-blue-600 transition" title="Editar Detalles">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
                         </a>
                     </div>
@@ -80,113 +80,13 @@
             </div>
 
         @empty
-            <!-- Tarjeta 1: Con Foto (Fallback) -->
-            <div class="bg-white rounded-xl shadow-[0_2px_10px_-3px_rgba(0,0,0,0.05)] border border-gray-100 overflow-hidden group hover:border-red-300 hover:shadow-lg transition-all flex flex-col">
-                <div class="relative h-48 w-full bg-gray-100 overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1635769165993-9c87d4653549?q=80&w=400&auto=format&fit=crop" alt="Filtro" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-                    <div class="absolute top-3 right-3 bg-white/90 backdrop-blur-sm px-2 py-1 rounded text-[10px] font-bold text-gray-800 uppercase tracking-widest border border-gray-200 shadow-sm">
-                        Stock: 45
-                    </div>
-                    <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                        <button class="bg-white text-gray-900 px-4 py-2 rounded-lg text-[10px] font-bold uppercase tracking-widest flex items-center gap-2 hover:bg-red-600 hover:text-white transition">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                            Cambiar
-                        </button>
-                    </div>
-                </div>
-                <div class="p-4 flex-1 flex flex-col">
-                    <p class="text-[10px] font-mono text-gray-400 mb-1">SKU: FIL-045</p>
-                    <h3 class="font-bold text-gray-900 text-sm leading-tight mb-1">Filtro de Gasoil Secundario</h3>
-                    <p class="text-xs text-gray-500 mb-4">Marca: Donaldson / Aplica: Encava</p>
-                    <div class="mt-auto pt-3 border-t border-gray-100 flex justify-between items-center">
-                        <span class="text-sm font-black text-gray-900">$25.50</span>
-                        <button class="text-gray-400 hover:text-blue-600 transition" title="Editar Detalles">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Tarjeta 2: Con Foto (Fallback) -->
-            <div class="bg-white rounded-xl shadow-[0_2px_10px_-3px_rgba(0,0,0,0.05)] border border-gray-100 overflow-hidden group hover:border-red-300 hover:shadow-lg transition-all flex flex-col">
-                <div class="relative h-48 w-full bg-gray-100 overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?q=80&w=400&auto=format&fit=crop" alt="Repuesto" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-                    <div class="absolute top-3 right-3 bg-white/90 backdrop-blur-sm px-2 py-1 rounded text-[10px] font-bold text-orange-600 uppercase tracking-widest border border-orange-200 shadow-sm">
-                        Crítico: 4
-                    </div>
-                    <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                        <button class="bg-white text-gray-900 px-4 py-2 rounded-lg text-[10px] font-bold uppercase tracking-widest flex items-center gap-2 hover:bg-red-600 hover:text-white transition">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                            Cambiar
-                        </button>
-                    </div>
-                </div>
-                <div class="p-4 flex-1 flex flex-col">
-                    <p class="text-[10px] font-mono text-gray-400 mb-1">SKU: INY-112</p>
-                    <h3 class="font-bold text-gray-900 text-sm leading-tight mb-1">Inyector Principal Bosch</h3>
-                    <p class="text-xs text-gray-500 mb-4">Marca: Bosch / Aplica: Cargo 815</p>
-                    <div class="mt-auto pt-3 border-t border-gray-100 flex justify-between items-center">
-                        <span class="text-sm font-black text-gray-900">$140.00</span>
-                        <button class="text-gray-400 hover:text-blue-600 transition" title="Editar Detalles">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Tarjeta 3: SIN FOTO (Fallback) -->
-            <div class="bg-white rounded-xl shadow-[0_2px_10px_-3px_rgba(0,0,0,0.05)] border border-gray-200 overflow-hidden group hover:border-red-300 hover:shadow-lg transition-all flex flex-col">
-                <div class="relative h-48 w-full bg-gray-50 border-b border-gray-100 flex flex-col items-center justify-center text-gray-300">
-                    <svg class="w-12 h-12 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                    <p class="text-[10px] font-bold uppercase tracking-widest text-gray-400">Sin Imagen</p>
-                    <div class="absolute top-3 right-3 bg-white/90 backdrop-blur-sm px-2 py-1 rounded text-[10px] font-bold text-gray-800 uppercase tracking-widest border border-gray-200 shadow-sm">
-                        Stock: 12
-                    </div>
-                    <div class="absolute inset-0 bg-gray-900/5 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                        <button class="bg-red-600 text-white px-4 py-2 rounded-lg text-[10px] font-bold uppercase tracking-widest flex items-center gap-2 shadow-lg hover:bg-red-700 transition">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
-                            Subir Foto
-                        </button>
-                    </div>
-                </div>
-                <div class="p-4 flex-1 flex flex-col">
-                    <p class="text-[10px] font-mono text-gray-400 mb-1">SKU: EST-099</p>
-                    <h3 class="font-bold text-gray-900 text-sm leading-tight mb-1">Estopera Trasera Cigueñal</h3>
-                    <p class="text-xs text-gray-500 mb-4">Marca: Sabo / Aplica: NPR 4HG1</p>
-                    <div class="mt-auto pt-3 border-t border-gray-100 flex justify-between items-center">
-                        <span class="text-sm font-black text-gray-900">$18.00</span>
-                        <button class="text-gray-400 hover:text-blue-600 transition" title="Editar Detalles">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Tarjeta 4: Con Foto (Fallback) -->
-            <div class="bg-white rounded-xl shadow-[0_2px_10px_-3px_rgba(0,0,0,0.05)] border border-gray-100 overflow-hidden group hover:border-red-300 hover:shadow-lg transition-all flex flex-col">
-                <div class="relative h-48 w-full bg-gray-100 overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1616788806509-f62800537446?q=80&w=400&auto=format&fit=crop" alt="Correa" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-                    <div class="absolute top-3 right-3 bg-white/90 backdrop-blur-sm px-2 py-1 rounded text-[10px] font-bold text-red-600 uppercase tracking-widest border border-red-200 shadow-sm">
-                        Agotado
-                    </div>
-                    <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                        <button class="bg-white text-gray-900 px-4 py-2 rounded-lg text-[10px] font-bold uppercase tracking-widest flex items-center gap-2 hover:bg-red-600 hover:text-white transition">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                            Cambiar
-                        </button>
-                    </div>
-                </div>
-                <div class="p-4 flex-1 flex flex-col">
-                    <p class="text-[10px] font-mono text-gray-400 mb-1">SKU: COR-88X</p>
-                    <h3 class="font-bold text-gray-900 text-sm leading-tight mb-1">Correa de Alternador</h3>
-                    <p class="text-xs text-gray-500 mb-4">Marca: Gates / Aplica: Isuzu NPR</p>
-                    <div class="mt-auto pt-3 border-t border-gray-100 flex justify-between items-center">
-                        <span class="text-sm font-black text-gray-900">$32.00</span>
-                        <button class="text-gray-400 hover:text-blue-600 transition" title="Editar Detalles">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
-                        </button>
-                    </div>
-                </div>
+            <!-- Estado vacío elegante cuando no hay repuestos registrados -->
+            <div class="col-span-full py-16 text-center bg-white rounded-xl border border-gray-100 shadow-sm">
+                <svg class="w-12 h-12 mx-auto text-gray-300 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"></path>
+                </svg>
+                <h3 class="text-sm font-bold text-gray-700">No se encontraron repuestos</h3>
+                <p class="text-xs text-gray-400 mt-1">Intenta realizar otra búsqueda o registra nuevos repuestos en el sistema.</p>
             </div>
         @endforelse
 

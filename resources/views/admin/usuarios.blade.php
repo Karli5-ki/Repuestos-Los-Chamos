@@ -2,7 +2,6 @@
 
 @section('titulo', 'Seguridad y Usuarios - Repuestos Los Chamos')
 
-{{-- Asegúrate de que 'contenido' sea el nombre que usaste en tu @yield del layout.blade.php --}}
 @section('contenido')
 <div class="p-8 max-w-7xl mx-auto w-full">
     
@@ -12,8 +11,7 @@
             <h2 class="text-2xl font-bold text-gray-900 tracking-tight">Seguridad y Usuarios</h2>
             <p class="text-gray-500 mt-1 text-sm">Gestión de accesos y bitácora de auditoría del sistema.</p>
         </div>
-        <!-- Ajusta la ruta según tu web.php, ej: route('admin.usuarios.create') -->
-        <a href="#" class="bg-red-600 text-white px-4 py-2.5 rounded-lg font-bold text-[11px] uppercase tracking-widest shadow-[0_4px_12px_rgba(220,38,38,0.3)] hover:bg-red-700 hover:-translate-y-0.5 transition-all flex items-center gap-2">
+        <a href="{{ route('admin.usuarios.create') }}" class="bg-red-600 text-white px-4 py-2.5 rounded-lg font-bold text-[11px] uppercase tracking-widest shadow-[0_4px_12px_rgba(220,38,38,0.3)] hover:bg-red-700 hover:-translate-y-0.5 transition-all flex items-center gap-2">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"></path></svg>
             Nuevo Usuario
         </a>
@@ -27,14 +25,13 @@
             </div>
             <div>
                 <p class="text-gray-400 text-[10px] font-bold uppercase tracking-widest">Cuentas Activas</p>
-                <!-- Variable dinámica -->
                 <h3 class="text-2xl font-black text-gray-800">{{ $cuentasActivas ?? 0 }}</h3>
             </div>
         </div>
         
         <div class="bg-white p-5 rounded-xl shadow-[0_2px_10px_-3px_rgba(0,0,0,0.05)] border border-gray-100 flex items-center gap-4">
             <div class="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center text-gray-500">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2-2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
             </div>
             <div>
                 <p class="text-gray-400 text-[10px] font-bold uppercase tracking-widest">Cuentas Suspendidas</p>
@@ -51,7 +48,7 @@
             </div>
             <div>
                 <p class="text-gray-400 text-[10px] font-bold uppercase tracking-widest">Usuarios en línea ahora</p>
-                <h3 class="text-2xl font-black text-gray-800">{{ $usuariosEnLinea ?? 1 }}</h3>
+                <h3 class="text-2xl font-black text-gray-800">{{ $usuariosEnLinea ?? 0 }}</h3>
             </div>
         </div>
     </div>
@@ -85,10 +82,9 @@
                             <tr class="hover:bg-gray-50 transition-colors group">
                                 <td class="px-6 py-4">
                                     <div class="flex items-center gap-3">
-                                        <!-- Color e iniciales dinámicas por Rol -->
                                         @php
                                             $bgClass = $usuario->rol === 'Admin' ? 'bg-gray-900 text-white' : ($usuario->rol === 'Ventas' ? 'bg-blue-50 text-blue-700 border border-blue-200' : 'bg-orange-50 text-orange-700 border border-orange-200');
-                                            $iniciales = strtoupper(substr($usuario->nombre, 0, 1) . substr($usuario->apellido, 0, 1));
+                                            $iniciales = strtoupper(substr($usuario->nombre, 0, 1) . substr($usuario->apellido ?? '', 0, 1));
                                         @endphp
                                         <div class="w-8 h-8 rounded {{ $bgClass }} flex items-center justify-center text-xs font-bold">
                                             {{ $iniciales }}
@@ -114,13 +110,11 @@
                                 <td class="px-6 py-4 text-center opacity-0 group-hover:opacity-100 transition-opacity">
                                     <a href="{{ route('admin.usuarios.edit', $usuario->id) }}" class="text-gray-400 hover:text-blue-600 transition mx-1" title="Editar">✏️</a>
                                     
-                                    <!-- Si necesitas un botón para forzar cierre de sesión -->
                                     <form action="{{ route('admin.usuarios.logout_force', $usuario->id) }}" method="POST" class="inline">
                                         @csrf
                                         <button type="submit" class="text-gray-400 hover:text-orange-600 transition mx-1" title="Forzar Cierre de Sesión">🔌</button>
                                     </form>
 
-                                    <!-- Eliminar -->
                                     <form action="{{ route('admin.usuarios.destroy', $usuario->id) }}" method="POST" class="inline" onsubmit="return confirm('¿Eliminar este usuario?');">
                                         @csrf
                                         @method('DELETE')
@@ -129,22 +123,12 @@
                                 </td>
                             </tr>
                             @empty
-                            <!-- Dato estático temporal si no pasas variables desde el controlador aún -->
-                            <tr class="hover:bg-gray-50 transition-colors group">
-                                <td class="px-6 py-4">
-                                    <div class="flex items-center gap-3">
-                                        <div class="w-8 h-8 rounded bg-gray-900 text-white flex items-center justify-center text-xs font-bold">CA</div>
-                                        <div>
-                                            <p class="font-bold text-gray-900">Carlos Admin</p>
-                                            <p class="text-[10px] text-gray-400 font-mono">admin.general</p>
-                                        </div>
-                                    </div>
+                            <tr>
+                                <td colspan="4" class="px-6 py-12 text-center text-gray-400">
+                                    <svg class="w-10 h-10 mx-auto text-gray-300 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                                    <p class="text-sm font-bold text-gray-700">No se encontraron usuarios</p>
+                                    <p class="text-xs text-gray-400 mt-1">Intenta cambiar el filtro o registra un nuevo usuario en el sistema.</p>
                                 </td>
-                                <td class="px-6 py-4 text-center">
-                                    <span class="bg-gray-900 text-white px-2 py-1 rounded text-[10px] font-bold uppercase tracking-widest">Admin</span>
-                                </td>
-                                <td class="px-6 py-4 text-center"><span class="text-green-600 font-bold text-xs">Activo</span></td>
-                                <td class="px-6 py-4 text-center"><button class="text-gray-400 transition">✏️</button></td>
                             </tr>
                             @endforelse
 
@@ -153,8 +137,8 @@
                 </div>
             </div>
             
-            <!-- Paginación de Laravel (si la usas) -->
-           @if(isset($usuarios) && is_object($usuarios) && method_exists($usuarios, 'hasPages') && $usuarios->hasPages())
+            <!-- Paginación de Laravel -->
+            @if(isset($usuarios) && is_object($usuarios) && method_exists($usuarios, 'hasPages') && $usuarios->hasPages())
             <div class="mt-4">
                 {{ $usuarios->links() }}
             </div>
@@ -174,8 +158,7 @@
                     
                     @forelse($bitacora ?? [] as $log)
                         @php
-                            // Asigna color al puntito dependiendo del tipo de evento
-                            $dotColor = match($log->tipo) {
+                            $dotColor = match($log->tipo ?? 'sistema') {
                                 'facturacion' => 'bg-green-500',
                                 'critico' => 'bg-red-500',
                                 'sistema' => 'bg-gray-400',
@@ -185,27 +168,21 @@
                         @endphp
                         <div class="relative pl-6">
                             <span class="absolute -left-[5px] top-1.5 w-2 h-2 rounded-full {{ $dotColor }} ring-4 ring-white"></span>
-                            <p class="text-[10px] font-bold text-gray-400 mb-0.5">{{ $log->created_at->diffForHumans() }}</p>
+                            <p class="text-[10px] font-bold text-gray-400 mb-0.5">{{ $log->created_at ? $log->created_at->diffForHumans() : '' }}</p>
                             <p class="text-sm text-gray-700">{!! $log->mensaje_html !!}</p>
                         </div>
                     @empty
-                        <!-- Ejemplos estáticos de tu HTML original -->
-                        <div class="relative pl-6">
-                            <span class="absolute -left-[5px] top-1.5 w-2 h-2 rounded-full bg-green-500 ring-4 ring-white"></span>
-                            <p class="text-[10px] font-bold text-gray-400 mb-0.5">Hace 5 min</p>
-                            <p class="text-sm text-gray-700"><span class="font-bold text-gray-900">María Pérez</span> procesó la factura <span class="font-mono font-bold text-blue-600">#001044</span> por $145.00</p>
-                        </div>
-                        <div class="relative pl-6">
-                            <span class="absolute -left-[5px] top-1.5 w-2 h-2 rounded-full bg-red-500 ring-4 ring-white"></span>
-                            <p class="text-[10px] font-bold text-gray-400 mb-0.5">Hace 45 min</p>
-                            <p class="text-sm text-gray-700"><span class="font-bold text-gray-900">José Gómez</span> ajustó manualmente el stock de <span class="font-bold">Inyector NPR</span> de 5 a 0.</p>
+                        <div class="py-12 text-center">
+                            <svg class="w-8 h-8 mx-auto text-gray-300 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
+                            <p class="text-xs font-bold text-gray-600">Sin actividad reciente</p>
+                            <p class="text-[10px] text-gray-400 mt-0.5">Los eventos del sistema aparecerán aquí.</p>
                         </div>
                     @endforelse
 
                 </div>
             </div>
             <div class="px-6 py-3 border-t border-gray-100 bg-gray-50/50 text-center">
-                <a href="#" class="text-[10px] font-bold text-red-600 hover:text-red-700 uppercase tracking-widest transition">Ver historial completo →</a>
+                <a href="{{ route('admin.bitacora.index') }}" class="text-[10px] font-bold text-red-600 hover:text-red-700 uppercase tracking-widest transition">Ver historial completo →</a>
             </div>
         </div>
 

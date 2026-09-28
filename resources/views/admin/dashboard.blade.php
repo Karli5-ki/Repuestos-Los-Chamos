@@ -42,25 +42,25 @@
         <!-- Ingresos -->
         <div class="bg-white p-6 rounded-xl shadow-[0_2px_10px_-3px_rgba(0,0,0,0.05)] border border-gray-100 border-l-4 border-l-green-500 animate-fade-in-up delay-100">
             <p class="text-gray-400 text-[10px] font-bold uppercase tracking-widest mb-1">Ingresos de Hoy</p>
-            <h3 class="text-3xl font-black text-gray-800">${{ number_format($ingresosHoy ?? 845.50, 2) }}</h3>
-            <p class="text-green-600 text-[11px] font-bold mt-2 flex items-center gap-1">↑ +12% vs ayer</p>
+            <h3 class="text-3xl font-black text-gray-800">${{ number_format($ingresosHoy ?? 0, 2) }}</h3>
+            <p class="text-green-600 text-[11px] font-bold mt-2 flex items-center gap-1">Sin movimientos previos</p>
         </div>
         <!-- Ventas -->
         <div class="bg-white p-6 rounded-xl shadow-[0_2px_10px_-3px_rgba(0,0,0,0.05)] border border-gray-100 border-l-4 border-l-gray-800 animate-fade-in-up delay-200">
             <p class="text-gray-400 text-[10px] font-bold uppercase tracking-widest mb-1">Facturas Emitidas</p>
-            <h3 class="text-3xl font-black text-gray-800">{{ $facturasHoy ?? 14 }}</h3>
-            <p class="text-gray-500 text-[11px] font-medium mt-2">Promedio: ${{ number_format($promedioTicket ?? 60, 2) }}/ticket</p>
+            <h3 class="text-3xl font-black text-gray-800">{{ $facturasHoy ?? 0 }}</h3>
+            <p class="text-gray-500 text-[11px] font-medium mt-2">Promedio: ${{ number_format($promedioTicket ?? 0, 2) }}/ticket</p>
         </div>
         <!-- Alertas -->
         <div class="bg-white p-6 rounded-xl shadow-[0_2px_10px_-3px_rgba(0,0,0,0.05)] border border-gray-100 border-l-4 border-l-red-600 animate-fade-in-up delay-300">
             <p class="text-gray-400 text-[10px] font-bold uppercase tracking-widest mb-1">Alertas Almacén</p>
-            <h3 class="text-3xl font-black text-red-600">{{ $alertasAlmacen ?? 12 }}</h3>
+            <h3 class="text-3xl font-black text-red-600">{{ $alertasAlmacen ?? 0 }}</h3>
             <p class="text-red-500 text-[11px] font-bold mt-2">Repuestos críticos</p>
         </div>
         <!-- Cuentas -->
         <div class="bg-white p-6 rounded-xl shadow-[0_2px_10px_-3px_rgba(0,0,0,0.05)] border border-gray-100 border-l-4 border-l-orange-500 animate-fade-in-up delay-400">
             <p class="text-gray-400 text-[10px] font-bold uppercase tracking-widest mb-1">Cuentas por Pagar</p>
-            <h3 class="text-3xl font-black text-gray-800">${{ number_format($cuentasPorPagar ?? 1240, 2) }}</h3>
+            <h3 class="text-3xl font-black text-gray-800">${{ number_format($cuentasPorPagar ?? 0, 2) }}</h3>
             <p class="text-orange-600 text-[11px] font-bold mt-2">A proveedores</p>
         </div>
     </div>
@@ -73,7 +73,7 @@
             <div class="flex justify-between items-start mb-2">
                 <div>
                     <h3 class="text-xs font-bold text-gray-400 uppercase tracking-widest">Flujo de Ingresos</h3>
-                    <h4 class="text-xl font-black text-gray-900 mt-1">${{ number_format($totalFlujoSemanal ?? 4055.00, 2) }}</h4>
+                    <h4 class="text-xl font-black text-gray-900 mt-1">${{ number_format($totalFlujoSemanal ?? 0, 2) }}</h4>
                 </div>
                 
                 <div class="flex bg-gray-100 rounded-lg p-1">
@@ -101,42 +101,8 @@
                         </div>
                     </div>
                 @empty
-                    <!-- Datos de muestra fallback en caso de no recibir variables de BD -->
-                    <div>
-                        <div class="flex justify-between items-center mb-1">
-                            <span class="text-xs font-bold text-gray-800">Filtro Gasoil Encava</span>
-                            <span class="text-[10px] font-bold text-gray-500">142 Unds</span>
-                        </div>
-                        <div class="w-full bg-gray-100 rounded-full h-1.5">
-                            <div class="bg-red-600 h-1.5 rounded-full" style="width: 85%"></div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="flex justify-between items-center mb-1">
-                            <span class="text-xs font-bold text-gray-800">Inyector Principal NPR</span>
-                            <span class="text-[10px] font-bold text-gray-500">89 Unds</span>
-                        </div>
-                        <div class="w-full bg-gray-100 rounded-full h-1.5">
-                            <div class="bg-red-500 h-1.5 rounded-full" style="width: 65%"></div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="flex justify-between items-center mb-1">
-                            <span class="text-xs font-bold text-gray-800">Correa Tiempo Cargo</span>
-                            <span class="text-[10px] font-bold text-gray-500">64 Unds</span>
-                        </div>
-                        <div class="w-full bg-gray-100 rounded-full h-1.5">
-                            <div class="bg-red-400 h-1.5 rounded-full" style="width: 45%"></div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="flex justify-between items-center mb-1">
-                            <span class="text-xs font-bold text-gray-800">Estopera Trasera Isuzu</span>
-                            <span class="text-[10px] font-bold text-gray-500">31 Unds</span>
-                        </div>
-                        <div class="w-full bg-gray-100 rounded-full h-1.5">
-                            <div class="bg-red-300 h-1.5 rounded-full" style="width: 25%"></div>
-                        </div>
+                    <div class="py-12 text-center">
+                        <p class="text-xs text-gray-400 font-medium">No hay registros de piezas rotadas este mes.</p>
                     </div>
                 @endforelse
             </div>
@@ -169,23 +135,10 @@
                             <td class="px-6 py-3 text-right font-bold text-green-600">+${{ number_format($transaccion->total, 2) }}</td>
                         </tr>
                     @empty
-                        <tr class="hover:bg-gray-50 transition-colors">
-                            <td class="px-6 py-3 font-mono text-xs font-bold text-gray-900">#001043</td>
-                            <td class="px-6 py-3 text-xs">Hace 2 min</td>
-                            <td class="px-6 py-3 text-xs font-medium">María Pérez</td>
-                            <td class="px-6 py-3 text-right font-bold text-green-600">+$125.00</td>
-                        </tr>
-                        <tr class="hover:bg-gray-50 transition-colors">
-                            <td class="px-6 py-3 font-mono text-xs font-bold text-gray-900">#001042</td>
-                            <td class="px-6 py-3 text-xs">Hace 15 min</td>
-                            <td class="px-6 py-3 text-xs font-medium">José Gómez</td>
-                            <td class="px-6 py-3 text-right font-bold text-green-600">+$45.50</td>
-                        </tr>
-                        <tr class="hover:bg-gray-50 transition-colors">
-                            <td class="px-6 py-3 font-mono text-xs font-bold text-gray-900">#001041</td>
-                            <td class="px-6 py-3 text-xs">Hace 45 min</td>
-                            <td class="px-6 py-3 text-xs font-medium">María Pérez</td>
-                            <td class="px-6 py-3 text-right font-bold text-green-600">+$310.00</td>
+                        <tr>
+                            <td colspan="4" class="px-6 py-8 text-center text-xs text-gray-400 font-medium">
+                                No se registran transacciones recientes en el sistema.
+                            </td>
                         </tr>
                     @endforelse
                 </tbody>
@@ -202,7 +155,7 @@
         var options = {
             series: [{
                 name: 'Ingresos Diarios ($)',
-                data: {!! json_encode($datosGrafico ?? [420, 650, 510, 890, 740, 0, 845]) !!}
+                data: {!! json_encode($datosGrafico ?? [0, 0, 0, 0, 0, 0, 0]) !!}
             }],
             chart: {
                 type: 'area',
